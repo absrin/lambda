@@ -23,7 +23,15 @@ def stop_ec2(event, context):
 
 # get the list of all the ec2 instances
 def get_all_ec2_ids():
-    response = ec2.describe_instances(DryRun=False)
+    response = ec2.describe_instances(
+        Filters=[
+        {
+            'tag': 'custodian',
+            'Values': 'offhour'
+        },
+    ],
+        DryRun=False
+        )
     instances = []
     for reservation in response["Reservations"]:
         for instance in reservation["Instances"]:
