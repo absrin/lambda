@@ -26,7 +26,7 @@ def get_all_ec2_ids():
     response = ec2.describe_instances(
         Filters=[
         {
-            'tag': 'custodian',
+            'Name': 'tag:custodian',
             'Values': 'offhour'
         },
     ],
